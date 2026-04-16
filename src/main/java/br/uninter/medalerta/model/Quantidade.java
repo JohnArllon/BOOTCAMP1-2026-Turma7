@@ -1,6 +1,6 @@
 package br.uninter.medalerta.model;
 
-public enum QuantidadeTipo {
+public enum Quantidade {
     UNIDADE,
     ML
 }

@@ -13,93 +13,42 @@ public class Medicamento {
     @Column(name = "idMedicamento")
     private Integer idMedicamento;
 
-    @Column(nullable = false, length = 100)
+    @Column(name = "nomeComercial", nullable = false, length = 100)
     private String nomeComercial;
 
-    @Column(length = 100)
+    @Column(name = "nomeGenerico", length = 100)
     private String nomeGenerico;
 
     @Enumerated(EnumType.STRING)
-    @Column(length = 20)
-    private QuantidadeTipo quantidade;
+    @Column(name = "quantidade", length = 20)
+    private Quantidade quantidade;
 
-    @Column(length = 100)
+    @Column(name = "formaUso", length = 100)
     private String formaUso;
 
-    @Column(length = 200)
+    @Column(name = "observacao", length = 200)
     private String observacao;
 
-    @OneToMany(mappedBy = "medicamento", cascade = CascadeType.ALL, orphanRemoval = false)
+    @OneToMany(mappedBy = "medicamento", cascade = CascadeType.ALL)
     private List<UsuarioMedicamento> usuarioMedicamentos = new ArrayList<>();
 
-    public Medicamento() {
-    }
+    public Medicamento() {}
 
-    public Integer getIdMedicamento() {
-        return idMedicamento;
-    }
+    public Integer getIdMedicamento() { return idMedicamento; }
+    public void setIdMedicamento(Integer idMedicamento) { this.idMedicamento = idMedicamento; }
 
-    public void setIdMedicamento(Integer idMedicamento) {
-        this.idMedicamento = idMedicamento;
-    }
+    public String getNomeComercial() { return nomeComercial; }
+    public void setNomeComercial(String nomeComercial) { this.nomeComercial = nomeComercial; }
 
-    public String getNomeComercial() {
-        return nomeComercial;
-    }
+    public String getNomeGenerico() { return nomeGenerico; }
+    public void setNomeGenerico(String nomeGenerico) { this.nomeGenerico = nomeGenerico; }
 
-    public void setNomeComercial(String nomeComercial) {
-        this.nomeComercial = nomeComercial;
-    }
+    public Quantidade getQuantidade() { return quantidade; }
+    public void setQuantidade(Quantidade quantidade) { this.quantidade = quantidade; }
 
-    public String getNomeGenerico() {
-        return nomeGenerico;
-    }
+    public String getFormaUso() { return formaUso; }
+    public void setFormaUso(String formaUso) { this.formaUso = formaUso; }
 
-    public void setNomeGenerico(String nomeGenerico) {
-        this.nomeGenerico = nomeGenerico;
-    }
-
-    public QuantidadeTipo getQuantidade() {
-        return quantidade;
-    }
-
-    public void setQuantidade(QuantidadeTipo quantidade) {
-        this.quantidade = quantidade;
-    }
-
-    public String getFormaUso() {
-        return formaUso;
-    }
-
-    public void setFormaUso(String formaUso) {
-        this.formaUso = formaUso;
-    }
-
-    public String getObservacao() {
-        return observacao;
-    }
-
-    public void setObservacao(String observacao) {
-        this.observacao = observacao;
-    }
-
-    public List<UsuarioMedicamento> getUsuarioMedicamentos() {
-        return usuarioMedicamentos;
-    }
-
-    public void setUsuarioMedicamentos(List<UsuarioMedicamento> usuarioMedicamentos) {
-        this.usuarioMedicamentos = usuarioMedicamentos;
-    }
-
-    @Override
-    public String toString() {
-        return "Medicamento{" +
-                "idMedicamento=" + idMedicamento +
-                ", nomeComercial='" + nomeComercial + '\'' +
-                ", nomeGenerico='" + nomeGenerico + '\'' +
-                ", quantidade=" + quantidade +
-                ", formaUso='" + formaUso + '\'' +
-                ", observacao='" + observacao + '\'' +
-                '}';
-    }
+    public String getObservacao() { return observacao; }
+    public void setObservacao(String observacao) { this.observacao = observacao; }
 }

@@ -1,26 +1,85 @@
-@startuml class_diagram
-!includeurl https://raw.githubusercontent.com/guipatriota/dracula-plantuml-theme/refs/heads/main/theme/theme.puml
-title Core Classes
+@startuml
+title MedAlerta - Diagrama de Classes
 
-class Wing
-class Room
-class Hall
-class Closet
-class Drawer
-class Engram
-class Tunnel
-class Hippocampus
-class ThalamusGateway
-class CortexIndex
+class Usuario {
+  idUsuario : Integer
+  nome : String
+  telefone : String
+  email : String
+  enderecoRua : String
+  enderecoNumero : Integer
+  enderecoComplemento : String
+  enderecoBairro : String
+  enderecoCEP : String
+  enderecoCidade : String
+  enderecoEstado : String
+}
 
-Wing "1" -- "*" Room
-Room "*" -- "1" Hall
-Room "1" -- "*" Engram
-Engram "1" -- "1" Drawer
-Engram "0..1" -- "1" Closet
-Room "*" -- "*" Tunnel
-Hippocampus --> Engram
-ThalamusGateway --> CortexIndex
-ThalamusGateway --> Engram
+class Medicamento {
+  idMedicamento : Integer
+  nomeComercial : String
+  nomeGenerico : String
+  quantidade : QuantidadeTipo
+  formaUso : String
+  observacao : String
+}
+
+class UsuarioMedicamento {
+  idUsuario : Integer
+  idMedicamento : Integer
+  horarioUso : LocalTime
+  frequenciaUso : String
+  dosagem : String
+  dataHorarioAlerta : LocalDateTime
+  statusAlerta : StatusAlerta
+  dataHorarioConsumo : LocalDateTime
+  confirmacaoConsumo : ConfirmacaoConsumo
+}
+
+class Frequencia {
+  idFrequencia : Integer
+  idUsuario : Integer
+  horarioUso : LocalTime
+  intervaloHoras : Integer
+  vezesPorDia : Integer
+}
+
+class Alerta {
+  idAlerta : Integer
+  idUsuario : Integer
+  dataHoraAlerta : LocalDateTime
+  statusAlerta : StatusAlerta
+}
+
+class Consumo {
+  idConsumo : Integer
+  idUsuario : Integer
+  dataHoraConsumo : LocalDateTime
+  confirmacaoConsumo : ConfirmacaoConsumo
+}
+
+enum QuantidadeTipo {
+  UNIDADE
+  ML
+}
+
+enum StatusAlerta {
+  EMITIDO
+  NAO_EMITIDO
+}
+
+enum ConfirmacaoConsumo {
+  SIM
+  NAO
+}
+
+' ================= RELACIONAMENTOS =================
+
+Usuario "1" -- "*" UsuarioMedicamento
+Medicamento "1" -- "*" UsuarioMedicamento
+
+Usuario "1" -- "*" Frequencia
+Usuario "1" -- "*" Alerta
+Usuario "1" -- "*" Consumo
 
 @enduml

@@ -5,6 +5,7 @@ services:
       dockerfile: Dockerfile
       target: dev
     container_name: medalerta-app
+    command: mvn clean spring-boot:run
     depends_on:
       db:
         condition: service_healthy
@@ -40,7 +41,7 @@ services:
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     ports:
-      - "3306:3306"
+      - "3308:3306"
     volumes:
       - mysql_data:/var/lib/mysql
       - ./docker/mysql/init:/docker-entrypoint-initdb.d:ro

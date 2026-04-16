@@ -1,6 +1,6 @@
 package br.uninter.medalerta.model;
 
-public enum ConfirmacaoConsumo {
+public enum Confirmacao {
     SIM,
     NAO
 }
