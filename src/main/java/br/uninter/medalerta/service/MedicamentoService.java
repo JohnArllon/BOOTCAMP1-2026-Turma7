@@ -16,6 +16,11 @@ public class MedicamentoService {
     }
 
     public Medicamento salvar(Medicamento medicamento) {
+        repository.findByNomeComercial(medicamento.getNomeComercial())
+                .ifPresent(m -> {
+                    throw new RuntimeException("ERRO: O medicamento '" + medicamento.getNomeComercial() + "' já está cadastrado no sistema.");
+                });
+
         return repository.save(medicamento);
     }
 
@@ -25,11 +30,10 @@ public class MedicamentoService {
 
     public Medicamento buscarPorId(Integer id) {
         return repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Medicamento não encontrado: " + id));
+                .orElseThrow(() -> new RuntimeException("Medicamento não encontrado com o ID: " + id));
     }
 
     public Medicamento atualizar(Integer id, Medicamento novoMedicamento) {
-
         Medicamento existente = buscarPorId(id);
 
         existente.setNomeComercial(novoMedicamento.getNomeComercial());
